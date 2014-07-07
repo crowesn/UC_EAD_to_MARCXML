@@ -278,28 +278,30 @@
 					</marc:datafield>			      
 				</xsl:if>-->
             <xsl:if test="//bioghist">
-               <xsl:if test="//bioghist/@encodinganalog='5450_'">
+              <xsl:choose> 
+                <xsl:when test="//origination/persname[@encodinganalog='100']">
                   <marc:datafield tag="545" ind1="0" ind2=" ">
                      <marc:subfield code="a">
                         <xsl:value-of select="normalize-space(//bioghist/p/.)"/>
                      </marc:subfield>
                   </marc:datafield>
-               </xsl:if>
-               <xsl:if test="//bioghist/@encodinganalog='5451_'">
+               </xsl:when>
+               <xsl:when test="//origination/corpname[@encodinganalog='110']">
                   <marc:datafield tag="545" ind1="1" ind2=" ">
                      <marc:subfield code="a">
                         <xsl:value-of select="normalize-space(//bioghist/p/.)"/>
                      </marc:subfield>
                   </marc:datafield>
-               </xsl:if>
-               <xsl:if test="//bioghist/@encodinganalog='545' or //bioghist/@encodinganalog='545$a'">
+               </xsl:when>
+               <xsl:otherwise>
                   <marc:datafield tag="545" ind1=" " ind2=" ">
                      <marc:subfield code="a">
                         <xsl:value-of select="normalize-space(//bioghist/p/.)"/>
                      </marc:subfield>
                   </marc:datafield>
-               </xsl:if>
-            </xsl:if>            
+               </xsl:otherwise>
+              </xsl:choose>           
+            </xsl:if>    
             <xsl:if test="archdesc/did/langmaterial">
                <marc:datafield tag="546" ind1=" " ind2=" ">
                   <marc:subfield code="a">
@@ -446,7 +448,8 @@
 
 
             <marc:datafield tag="852" ind1=" " ind2=" ">
-               <marc:subfield code="a">University of Cincinnati. Archives and Rare Book Library</marc:subfield>
+              <marc:subfield code="a">University of Cincinnati.</marc:subfield>
+              <marc:subfield code="b">Archives and Rare Book Library</marc:subfield>
             </marc:datafield>
 
             <xsl:if test="/ead/eadheader/eadid">

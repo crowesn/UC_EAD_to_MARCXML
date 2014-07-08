@@ -11,7 +11,7 @@
          <xsl:variable name="bulkdate" select="//unitdate[@encodinganalog='245$f']"/>
          <marc:record>
             <marc:leader>
-               <xsl:text>01125ntc a2200289Ia 4500</xsl:text>
+               <xsl:text>01125npc i2200289Ki 4500</xsl:text>
             </marc:leader>
             <xsl:choose>
                <xsl:when test="$bulkdate!=''">
@@ -28,15 +28,16 @@
                    </marc:controlfield>
                </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="/ead/eadheader/eadid">
+            <!--<xsl:if test="/ead/eadheader/eadid">
               <marc:controlfield tag="002">
                 <xsl:value-of select="/ead/eadheader/eadid" />
               </marc:controlfield>
-            </xsl:if>
+            </xsl:if>-->
             <marc:datafield tag="040" ind1=" " ind2=" ">
                <marc:subfield code="a">CIN</marc:subfield>
                <marc:subfield code="b">eng</marc:subfield>
                <marc:subfield code="e">dacs</marc:subfield>
+               <marc:subfield code="c">CIN</marc:subfield>
             </marc:datafield>
             <xsl:if test="/ead/archdesc/did/langmaterial/@langcode">
                <xsl:for-each select="/ead/archdesc/did/langmaterial/language">
@@ -454,10 +455,10 @@
 
             <xsl:if test="/ead/eadheader/eadid">
               <marc:datafield tag="856" ind1="4" ind2="0">
-                <marc:subfield tag="u">
+                <marc:subfield code="u">
                   <xsl:value-of select="concat('http://rave.ohiolink.edu/archives/ead/', /ead/eadheader/eadid)"/>
                 </marc:subfield>
-                <marc:subfield tag="z">
+                <marc:subfield code="z">
                   <xsl:text>Connect to finding aid online</xsl:text>
                 </marc:subfield>
               </marc:datafield>

@@ -79,7 +79,7 @@
                   <xsl:call-template name="persname_template">
                      <xsl:with-param name="string" select="normalize-space(//origination/famname/.)"/>
                      <xsl:with-param name="field" select="'100'"/>
-                     <xsl:with-param name="ind1" select="'1'"/>
+                     <xsl:with-param name="ind1" select="'3'"/>
                      <xsl:with-param name="ind2" select="' '"/>
                   </xsl:call-template>
                   <!--<marc:datafield tag="100" ind1="1" ind2=" ">
@@ -94,7 +94,7 @@
                         select="normalize-space(//origination/corpname/.)"/>
                      <xsl:with-param name="field" select="'110'"/>
                      <xsl:with-param name="ind1" select="'2'"/>
-                     <xsl:with-param name="ind2" select="'0'"/>
+                     <xsl:with-param name="ind2" select="' '"/>
                   </xsl:call-template>
                   <!--<marc:datafield tag="110" ind1="2" ind2=" ">
 							<marc:subfield code="a">
@@ -163,7 +163,7 @@
               <xsl:for-each select="archdesc/did/unitdate">
                   <marc:datafield tag="264" ind1=" " ind2="0">
                      <marc:subfield code="c">
-                        <xsl:value-of select="normalize-space(.)"/>
+                       <xsl:value-of select="normalize-space(.)"/><xsl:text>.</xsl:text>
                      </marc:subfield>
                   </marc:datafield>
                </xsl:for-each>
@@ -174,7 +174,7 @@
                <xsl:for-each select="archdesc/did/physdesc">
                   <marc:datafield tag="300" ind1=" " ind2=" ">
                      <marc:subfield code="a">
-                        <xsl:value-of select="normalize-space(.)"/>
+                       <xsl:value-of select="normalize-space(.)"/><xsl:text>.</xsl:text>
                      </marc:subfield>
                   </marc:datafield>
                </xsl:for-each>
@@ -312,7 +312,7 @@
             <xsl:for-each select="//controlaccess/persname | //controlaccess/corpname">
                <xsl:sort select="@encodinganalog"/>
                <xsl:choose>
-                  <xsl:when test="@encodinganalog='600'">
+                  <xsl:when test="@encodinganalog='600$a'">
                      <xsl:call-template name="persname_template">
                         <xsl:with-param name="string" select="normalize-space(.)"/>
                         <xsl:with-param name="field" select="'600'"/>
@@ -325,7 +325,7 @@
 								</marc:subfield>
 							</marc:datafield>-->
                   </xsl:when>
-                  <xsl:when test="@encodinganalog='610'">
+                  <xsl:when test="@encodinganalog='610$a'">
                      <xsl:call-template name="corpname_template">
                         <xsl:with-param name="string" select="normalize-space(.)"/>
                         <xsl:with-param name="field" select="'610'"/>
@@ -338,7 +338,7 @@
 								</marc:subfield>
 							</marc:datafield>-->
                   </xsl:when>
-                  <xsl:when test="@encodinganalog='611'">
+                  <xsl:when test="@encodinganalog='611$a'">
                      <marc:datafield tag="611" ind1="2" ind2="0">
                         <marc:subfield code="a">
                            <xsl:value-of select="normalize-space(.)"/>
@@ -391,7 +391,7 @@
 									</marc:subfield>
 								</marc:datafield>-->
                      </xsl:if>
-                     <xsl:if test="@encodinganalog='651'">
+                     <xsl:if test="@encodinganalog='651$a'">
                         <xsl:call-template name="subject_template">
                            <xsl:with-param name="string" select="normalize-space(.)"/>
                            <xsl:with-param name="field" select="'651'"/>
